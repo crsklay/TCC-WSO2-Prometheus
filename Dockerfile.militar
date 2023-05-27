@@ -1,0 +1,10 @@
+FROM cassiorp23/wso2ubuntu:latest
+
+# Copiar o arquivo .car
+COPY AtendimentoMilitarCompositeExporter_1.0.0.car /wso2mi-4.2.0/repository/deployment/server/carbonapps
+
+# Definir a porta de binding
+EXPOSE 9204 9167 8293 8256
+
+# Comando de inicialização do Micro Integrator
+CMD /wso2mi-4.2.0/bin/micro-integrator.sh -DenablePrometheusApi=true -DportOffset=13 -DenableManagementApi=true

@@ -1,0 +1,89 @@
+version: '3'
+
+networks:
+  meu-tcc:
+    external: true
+
+services:
+  db-militar:
+    image: cassiorp23/db-militar:latest
+    container_name: db-militar
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    networks:
+      meu-tcc:
+        ipv4_address: 192.168.10.2
+
+  wso2comorbidade:
+    image: cassiorp23/wso2comorbidade:latest
+    container_name: wso2comorbidade
+    restart: unless-stopped
+    ports:
+      - 9202:9202
+      - 9165:9165
+      - 8291:8291
+      - 8254:8254
+    networks:
+      meu-tcc:
+        ipv4_address: 192.168.10.3
+    depends_on:
+      - db-militar
+
+  wso2medicamento:
+    image: cassiorp23/wso2medicamento:latest
+    container_name: wso2medicamento
+    restart: unless-stopped
+    ports:
+      - 9203:9203
+      - 9166:9166
+      - 8292:8292
+      - 8255:8255
+    networks:
+      meu-tcc:
+        ipv4_address: 192.168.10.4
+    depends_on:
+      - db-militar
+
+  wso2militar:
+    image: cassiorp23/wso2militar:latest
+    container_name: wso2militar
+    restart: unless-stopped
+    ports:
+      - 9204:9204
+      - 9167:9167
+      - 8293:8293
+      - 8256:8256
+    networks:
+      meu-tcc:
+        ipv4_address: 192.168.10.5
+    depends_on:
+      - db-militar
+  
+  wso2prometheus:
+    image: prom/prometheus:latest
+    container_name: wso2prometheus
+    restart: unless-stopped
+    volumes:
+    - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+    networks:
+      meu-tcc:
+        ipv4_address: 192.168.10.10
+    depends_on:
+      - wso2comorbidade
+      - wso2medicamento
+      - wso2militar
+
+  wso2grafana:
+    image: grafana/grafana:latest
+    container_name: wso2grafana
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    networks:
+      meu-tcc:
+        ipv4_address: 192.168.10.11
+    depends_on:
+      - wso2prometheus
