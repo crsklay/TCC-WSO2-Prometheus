@@ -4,10 +4,10 @@ FROM ubuntu:latest
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 
 # Instalar o OpenJDK 17
-RUN apt-get update && apt-get install -y openjdk-17-jdk
+RUN apt-get update --no-install-recommends && apt-get install -y openjdk-17-jdk
 
 # Copiar a pasta do Micro Integrator para o container
-COPY wso2mi-4.2.0 /wso2mi-4.2.0
+COPY ../wso2mi-4.2.0 /wso2mi-4.2.0
 
 # Definir as variáveis de ambiente necessárias pelo Micro Integrator
 ENV CARBON_HOME=/wso2mi-4.2.0

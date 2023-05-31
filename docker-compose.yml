@@ -4,6 +4,9 @@ networks:
   meu-tcc:
     external: true
 
+volumes:
+  logsfluentbit:
+
 services:
   db-militar:
     image: cassiorp23/db-militar:latest
@@ -19,6 +22,8 @@ services:
     image: cassiorp23/wso2comorbidade:latest
     container_name: wso2comorbidade
     restart: unless-stopped
+    volumes:
+      - logsfluentbit/comorbidade:/wso2mi-4.2.0/repository/logs
     ports:
       - 9202:9202
       - 9165:9165
@@ -34,6 +39,8 @@ services:
     image: cassiorp23/wso2medicamento:latest
     container_name: wso2medicamento
     restart: unless-stopped
+    volumes:
+      - logsfluentbit/medicamento:/wso2mi-4.2.0/repository/logs  
     ports:
       - 9203:9203
       - 9166:9166
@@ -49,6 +56,8 @@ services:
     image: cassiorp23/wso2militar:latest
     container_name: wso2militar
     restart: unless-stopped
+    volumes:
+      - logsfluentbit/militar:/wso2mi-4.2.0/repository/logs
     ports:
       - 9204:9204
       - 9167:9167
@@ -65,7 +74,7 @@ services:
     container_name: wso2prometheus
     restart: unless-stopped
     volumes:
-    - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    - ./prometheus_config/prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
       - 9090:9090
     networks:
@@ -87,3 +96,17 @@ services:
         ipv4_address: 192.168.10.11
     depends_on:
       - wso2prometheus
+      - fluentbit
+
+  fluentbit:
+    image: grafana/fluent-bit-plugin-loki:latest
+    volumes:
+      - logsfluentbit/comorbidade:/logs/comorbidade
+      - logsfluentbit/medicamento:/logs/medicamento
+      - logsfluentbit/militar:/logs/militar
+      - ./fluentbit_configs/*:/fluent-bit/etc/
+    ports:
+      - 3100:3100
+    networks:
+      meu-tcc:
+        ipv4_address: 192.168.10.12
