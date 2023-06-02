@@ -28,4 +28,4 @@ Criação das demais imagens personalizadas (as API's):
 
 ##### Iniciando os contêineres
 Atentar se as portas especificadas dentro do *docker-compose.yml* estão disponíveis:
-```docker-compose up```
+```docker-compose -p monitoracao up```

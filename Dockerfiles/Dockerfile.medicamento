@@ -1,7 +1,7 @@
 FROM cassiorp23/wso2ubuntu:latest
 
 # Copiar o arquivo .car
-COPY ../CAR_APIs/AtendimentoMedicamentoCompositeExporter_1.0.0.car /wso2mi-4.2.0/repository/deployment/server/carbonapps
+COPY /CAR_APIs/AtendimentoMedicamentoCompositeExporter_1.0.0.car /wso2mi-4.2.0/repository/deployment/server/carbonapps
 
 # Definir a porta de binding
 EXPOSE 9203 9166 8292 8255

@@ -5,7 +5,9 @@ networks:
     external: true
 
 volumes:
-  logsfluentbit:
+  logsfluentbit_comorbidade:
+  logsfluentbit_medicamento:
+  logsfluentbit_militar:
 
 services:
   db-militar:
@@ -23,7 +25,7 @@ services:
     container_name: wso2comorbidade
     restart: unless-stopped
     volumes:
-      - logsfluentbit/comorbidade:/wso2mi-4.2.0/repository/logs
+      - logsfluentbit_comorbidade:/wso2mi-4.2.0/repository/logs
     ports:
       - 9202:9202
       - 9165:9165
@@ -40,7 +42,7 @@ services:
     container_name: wso2medicamento
     restart: unless-stopped
     volumes:
-      - logsfluentbit/medicamento:/wso2mi-4.2.0/repository/logs  
+      - logsfluentbit_medicamento:/wso2mi-4.2.0/repository/logs  
     ports:
       - 9203:9203
       - 9166:9166
@@ -57,7 +59,7 @@ services:
     container_name: wso2militar
     restart: unless-stopped
     volumes:
-      - logsfluentbit/militar:/wso2mi-4.2.0/repository/logs
+      - logsfluentbit_militar:/wso2mi-4.2.0/repository/logs
     ports:
       - 9204:9204
       - 9167:9167
@@ -85,6 +87,35 @@ services:
       - wso2medicamento
       - wso2militar
 
+  wso2fluentbit:
+    image: grafana/fluent-bit-plugin-loki:latest
+    volumes:
+      - logsfluentbit_comorbidade:/logs/comorbidade
+      - logsfluentbit_medicamento:/logs/medicamento
+      - logsfluentbit_militar:/logs/militar
+      - ./fluentbit_configs/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
+      - ./fluentbit_configs/labelmap.json:/fluent-bit/etc/labelmap.json
+      - ./fluentbit_configs/parsers.conf:/fluent-bit/etc/parsers.conf
+    environment:
+      - LOKI_URL=http://192.168.10.13:3100/loki/api/v1/push
+    networks:
+      meu-tcc:
+        ipv4_address: 192.168.10.12
+    depends_on:
+      - wso2prometheus
+
+  wso2loki:
+    image: grafana/loki:latest
+    volumes:
+      - ./loki_configs/loki-config.yaml:/etc/loki/local-config.yaml
+    ports:
+      - 3100:3100
+    networks:
+      meu-tcc:
+        ipv4_address: 192.168.10.13
+    depends_on:
+      - wso2fluentbit
+
   wso2grafana:
     image: grafana/grafana:latest
     container_name: wso2grafana
@@ -95,18 +126,4 @@ services:
       meu-tcc:
         ipv4_address: 192.168.10.11
     depends_on:
-      - wso2prometheus
-      - fluentbit
-
-  fluentbit:
-    image: grafana/fluent-bit-plugin-loki:latest
-    volumes:
-      - logsfluentbit/comorbidade:/logs/comorbidade
-      - logsfluentbit/medicamento:/logs/medicamento
-      - logsfluentbit/militar:/logs/militar
-      - ./fluentbit_configs/*:/fluent-bit/etc/
-    ports:
-      - 3100:3100
-    networks:
-      meu-tcc:
-        ipv4_address: 192.168.10.12
+      - wso2fluentbit
