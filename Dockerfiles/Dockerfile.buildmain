@@ -9,6 +9,10 @@ RUN apt-get update && apt-get install -y openjdk-17-jdk
 # Copiar a pasta do Micro Integrator para o container
 COPY /wso2mi-4.2.0 /wso2mi-4.2.0
 
+# Copiar as configurações necessárias para rodar o projeto
+COPY wso2mi_configs/deployment.toml /wso2mi-4.2.0/conf/deployment.toml
+COPY wso2mi_configs/postgresql-42.6.0.jar /wso2mi-4.2.0/lib/postgresql-42.6.0.jar
+
 # Definir as variáveis de ambiente necessárias pelo Micro Integrator
 ENV CARBON_HOME=/wso2mi-4.2.0
 ENV PATH=$PATH:$JAVA_HOME/bin:$CARBON_HOME/bin

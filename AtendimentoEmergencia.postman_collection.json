@@ -1,0 +1,674 @@
+{
+	"info": {
+		"_postman_id": "9bc30eaf-a147-4b88-9d29-1f1686e47f01",
+		"name": "AtendimentoEmergencia",
+		"description": "Acesso à informações sobre comorbidades e histórico de comorbidades de militares de militares",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Comorbidade",
+			"item": [
+				{
+					"name": "{cpf}",
+					"item": [
+						{
+							"name": "{cid}",
+							"item": [
+								{
+									"name": "operação utilizada para deletar uma comorbidade de um militar específico",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8291/AtendimentoEmergencia/api/Comorbidade/:cpf/:cid",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8291",
+											"path": [
+												"AtendimentoEmergencia",
+												"api",
+												"Comorbidade",
+												":cpf",
+												":cid"
+											],
+											"variable": [
+												{
+													"key": "cpf",
+													"value": "<string>"
+												},
+												{
+													"key": "cid",
+													"value": "<string>"
+												}
+											]
+										},
+										"description": "operação utilizada para deletar uma comorbidade de um militar específico"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "operação utilizada para retornar comorbidades de um militar específico",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8291/AtendimentoEmergencia/api/Comorbidade/:cpf",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8291",
+									"path": [
+										"AtendimentoEmergencia",
+										"api",
+										"Comorbidade",
+										":cpf"
+									],
+									"variable": [
+										{
+											"key": "cpf",
+											"value": "12345678901"
+										}
+									]
+								},
+								"description": "operação utilizada para retornar comorbidades de um militar específico"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Registro",
+					"item": [
+						{
+							"name": "{cid}",
+							"item": [
+								{
+									"name": "operação utilizada para retornar dados de uma comorbidade",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8291/AtendimentoEmergencia/api//Comorbidade/Registro/:cid",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8291",
+											"path": [
+												"AtendimentoEmergencia",
+												"api",
+												"",
+												"Comorbidade",
+												"Registro",
+												":cid"
+											],
+											"variable": [
+												{
+													"key": "cid",
+													"value": "<string>"
+												}
+											]
+										},
+										"description": "operação utilizada para retornar dados de uma comorbidade"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "operação utilizada para alterar a comorbidade de um militar específico",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cpf\": \"<string>\",\n  \"cid\": \"<string>\",\n  \"status\": \"<boolean>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8291/AtendimentoEmergencia/api/Comorbidade",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8291",
+							"path": [
+								"AtendimentoEmergencia",
+								"api",
+								"Comorbidade"
+							]
+						},
+						"description": "operação utilizada para alterar a comorbidade de um militar específico"
+					},
+					"response": []
+				},
+				{
+					"name": "operação utilizada para inserir uma comorbidade de um militar ao banco de dados",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cpf\": \"<string>\",\n  \"cid\": \"<string>\",\n  \"status\": \"<boolean>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8291/AtendimentoEmergencia/api/Comorbidade",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8291",
+							"path": [
+								"AtendimentoEmergencia",
+								"api",
+								"Comorbidade"
+							]
+						},
+						"description": "operação utilizada para inserir uma comorbidade de um militar ao banco de dados"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Medicamento",
+			"item": [
+				{
+					"name": "{gtin}",
+					"item": [
+						{
+							"name": "operação utilizada para retornar dados de um medicamento",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8292/AtendimentoEmergencia/api/Medicamento/12345678901",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8292",
+									"path": [
+										"AtendimentoEmergencia",
+										"api",
+										"Medicamento",
+										"12345678901"
+									]
+								},
+								"description": "operação utilizada para retornar dados de um medicamento"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "{cpf}",
+					"item": [
+						{
+							"name": "{gtin}",
+							"item": [
+								{
+									"name": "operação utilizada para deletar uma comorbidade de um militar específico",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8292/AtendimentoEmergencia/api/Medicamento/12345678901/4567890123456",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8292",
+											"path": [
+												"AtendimentoEmergencia",
+												"api",
+												"Medicamento",
+												"12345678901",
+												"4567890123456"
+											]
+										},
+										"description": "operação utilizada para deletar uma comorbidade de um militar específico"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "operação utilizada para retornar medicamentos utilizados por um militar específico",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8292/AtendimentoEmergencia/api/Medicamento/Registro/4567890123456",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8292",
+									"path": [
+										"AtendimentoEmergencia",
+										"api",
+										"Medicamento",
+										"Registro",
+										"4567890123456"
+									]
+								},
+								"description": "operação utilizada para retornar medicamentos utilizados por um militar específico"
+							},
+							"response": []
+						},
+						{
+							"name": "operação utilizada para alterar o registro um medicamento utilizado por um militar específico",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "cpf",
+											"value": "12345678901",
+											"type": "text"
+										},
+										{
+											"key": "gtin",
+											"value": "4567890123456",
+											"type": "text"
+										},
+										{
+											"key": "prescricao",
+											"value": "Prescrição R",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8292/AtendimentoEmergencia/api/Medicamento",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8292",
+									"path": [
+										"AtendimentoEmergencia",
+										"api",
+										"Medicamento"
+									]
+								},
+								"description": "operação utilizada para alterar o registro um medicamento utilizado por um militar específico"
+							},
+							"response": []
+						},
+						{
+							"name": "operação utilizada para inserir um medicamento utilizado por um militar ao banco de dados",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "cpf",
+											"value": "12345678901",
+											"type": "text"
+										},
+										{
+											"key": "gtin",
+											"value": "4567890123456",
+											"type": "text"
+										},
+										{
+											"key": "prescricao",
+											"value": "Prescrição Z",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8292/AtendimentoEmergencia/api/Medicamento",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8292",
+									"path": [
+										"AtendimentoEmergencia",
+										"api",
+										"Medicamento"
+									]
+								},
+								"description": "operação utilizada para inserir um medicamento utilizado por um militar ao banco de dados"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Militar",
+			"item": [
+				{
+					"name": "MilitarShort",
+					"item": [
+						{
+							"name": "{cpf}",
+							"item": [
+								{
+									"name": "operação utilizada para retornar dados resumidos de um militar específico",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8293/AtendimentoEmergencia/api/MilitarShort/:cpf",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8293",
+											"path": [
+												"AtendimentoEmergencia",
+												"api",
+												"MilitarShort",
+												":cpf"
+											],
+											"query": [
+												{
+													"key": "",
+													"value": null,
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "cpf",
+													"value": "99999999999"
+												}
+											]
+										},
+										"description": "operação utilizada para retornar dados resumidos de um militar específico"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Militar",
+					"item": [
+						{
+							"name": "{cpf}",
+							"item": [
+								{
+									"name": "operação utilizada para retornar os dados de um militar específico",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8293/AtendimentoEmergencia/api/Militar/:cpf",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8293",
+											"path": [
+												"AtendimentoEmergencia",
+												"api",
+												"Militar",
+												":cpf"
+											],
+											"variable": [
+												{
+													"key": "cpf",
+													"value": "99999999999"
+												}
+											]
+										},
+										"description": "operação utilizada para retornar os dados de um militar específico"
+									},
+									"response": []
+								},
+								{
+									"name": "operação utilizada para deletar os dados de um militar específico",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8293/AtendimentoEmergencia/api/Militar/:cpf",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8293",
+											"path": [
+												"AtendimentoEmergencia",
+												"api",
+												"Militar",
+												":cpf"
+											],
+											"variable": [
+												{
+													"key": "cpf",
+													"value": "<string>"
+												}
+											]
+										},
+										"description": "operação utilizada para deletar os dados de um militar específico"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "operação utilizada para alterar os dados de um militar específico",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cpf\": \"<string>\",\n  \"nome\": \"<string>\",\n  \"nomeGuerra\": \"<string>\",\n  \"nascimento\": \"<date>\",\n  \"graduacao\": \"<string>\",\n  \"genero\": \"<string>\",\n  \"status\": \"<string>\",\n  \"rg\": \"<string>\",\n  \"forca\": \"<string>\",\n  \"tipo_sanguineo\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8293/AtendimentoEmergencia/api/Militar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8293",
+									"path": [
+										"AtendimentoEmergencia",
+										"api",
+										"Militar"
+									]
+								},
+								"description": "operação utilizada para alterar os dados de um militar específico"
+							},
+							"response": []
+						},
+						{
+							"name": "operação utilizada para inserir novo militar ao banco de dados",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "cpf",
+											"value": "99999999999",
+											"type": "text"
+										},
+										{
+											"key": "nome",
+											"value": "<string>",
+											"type": "text"
+										},
+										{
+											"key": "nomeGuerra",
+											"value": "<string>",
+											"type": "text"
+										},
+										{
+											"key": "nascimento",
+											"value": "<date>",
+											"type": "text"
+										},
+										{
+											"key": "graduacao",
+											"value": "<string>",
+											"type": "text"
+										},
+										{
+											"key": "genero",
+											"value": "<string>",
+											"type": "text"
+										},
+										{
+											"key": "status",
+											"value": "<string>",
+											"type": "text"
+										},
+										{
+											"key": "rg",
+											"value": "<string>",
+											"type": "text"
+										},
+										{
+											"key": "forca",
+											"value": "<string>",
+											"type": "text"
+										},
+										{
+											"key": "tipo_sanguineo",
+											"value": "<string>",
+											"type": "text"
+										},
+										{
+											"key": "",
+											"value": "",
+											"type": "default",
+											"disabled": true
+										}
+									],
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8293/AtendimentoEmergencia/api/Militar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8293",
+									"path": [
+										"AtendimentoEmergencia",
+										"api",
+										"Militar"
+									]
+								},
+								"description": "operação utilizada para inserir novo militar ao banco de dados"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8290/AtendimentoEmergencia/api"
+		}
+	]
+}

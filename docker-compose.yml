@@ -8,6 +8,7 @@ volumes:
   logsfluentbit_comorbidade:
   logsfluentbit_medicamento:
   logsfluentbit_militar:
+  grafana-storage:
 
 services:
   db-militar:
@@ -116,10 +117,27 @@ services:
     depends_on:
       - wso2fluentbit
 
+  wso2jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - 5775:5775/udp
+      - 6831:6831/udp
+      - 6832:6832/udp
+      - 5778:5778
+      - 16686:16686
+      - 14268:14268
+    networks:
+      meu-tcc:
+        ipv4_address: 192.168.10.14
+    depends_on:
+      - wso2loki
+
   wso2grafana:
     image: grafana/grafana:latest
     container_name: wso2grafana
     restart: unless-stopped
+    volumes:
+      - ./grafana:/var/lib/grafana
     ports:
       - 3000:3000
     networks:
